@@ -28,7 +28,7 @@ def get_struct_data_from_exel():
     args = parser.parse_args()
 
     try:
-        from_exel = read_excel(io=f'{args.path}',
+        from_exel = read_excel(io=args.path,
                                sheet_name='wines',
                                usecols=['Категория', 'Название', 'Сорт', 'Цена', 'Картинка', 'Акция'],
                                na_values='Сорт неизвестен',
