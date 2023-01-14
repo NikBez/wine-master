@@ -18,25 +18,18 @@ def get_year_word(year):
         return 'лет'
 
 
-def get_struct_data_from_exel():
+def get_struct_data_from_exel(args):
     """ Функция считывает данные из exel таблицы и возвращает вложенную структуру. """
 
     catalog = defaultdict(list)
 
-    parser = argparse.ArgumentParser(description="Скрипт создает страницу сайта и подгружает в нее ассортимент из файла wines.xlsx")
-    parser.add_argument('-p', '--path', default='wines.xlsx', help="Путь к файлу с каталогом")
-    args = parser.parse_args()
+    from_exel = read_excel(io=args.path,
+                           sheet_name='wines',
+                           usecols=['Категория', 'Название', 'Сорт', 'Цена', 'Картинка', 'Акция'],
+                           na_values='Сорт неизвестен',
+                           keep_default_na=False,
+                           )
 
-    try:
-        from_exel = read_excel(io=args.path,
-                               sheet_name='wines',
-                               usecols=['Категория', 'Название', 'Сорт', 'Цена', 'Картинка', 'Акция'],
-                               na_values='Сорт неизвестен',
-                               keep_default_na=False,
-                               )
-    except IOError:
-        print('File not found')
-        sys.exit()
 
     wines = from_exel.to_dict(orient="records")
 
