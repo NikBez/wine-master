@@ -18,12 +18,12 @@ def get_year_word(year):
         return 'лет'
 
 
-def get_struct_data_from_exel(args):
+def get_struct_data_from_exel(catalog_path):
     """ Функция считывает данные из exel таблицы и возвращает вложенную структуру. """
 
     catalog = defaultdict(list)
 
-    from_exel = read_excel(io=args.path,
+    from_exel = read_excel(io=catalog_path,
                            sheet_name='wines',
                            usecols=['Категория', 'Название', 'Сорт', 'Цена', 'Картинка', 'Акция'],
                            na_values='Сорт неизвестен',

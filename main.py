@@ -13,7 +13,7 @@ def main():
     args = parser.parse_args()
 
     try:
-        catalog = get_struct_data_from_exel(args)
+        catalog = get_struct_data_from_exel(args.path)
     except IOError:
         print('File not found')
         sys.exit()
